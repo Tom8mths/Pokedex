@@ -13,8 +13,8 @@
             <li class="list-group-item">Generation: {{ pokemon.Generation }}</li>
             <li class="list-group-item">Resistance: {{ pokemon.Resistant.join(', ') }}</li>
             <li class="list-group-item">Weaknesses: {{ pokemon.Weaknesses.join(', ') }}</li>
-            <li class="list-group-item">Quick attacks: {{ pokemon["Fast Attack(s)"].Name }} </li>
-            <li class="list-group-item">Special Attacks: {{ pokemon["Special Attack(s)"].join(', ') }} </li>
+            <li class="list-group-item">Quick attacks: <span v-for="(attack, index) in pokemon['Fast Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">Special Attacks: <span v-for="(attack, index) in pokemon['Special Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
           </ul>
         </div>
         <div class="col-md-6">
