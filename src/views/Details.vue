@@ -4,45 +4,99 @@
     <div class="container">
       <div class="row">
         <h2>Pokemon</h2>
-        <div class="card col-md-12 border rounded " style="width: 18rem;" :class="[pokemon.Types[0]]">
-          <img src="" class="card-img-top" alt="">
+        <div
+          class="card col-md-12 border rounded "
+          style="width: 18rem;"
+          :class="[pokemon.Types[0]]"
+        >
+          <img src="" class="card-img-top" alt="" />
           <div class="card-body">
-            <h3 class="card-title">{{ pokemon.Name }} </h3>
+            <h3 class="card-title">{{ pokemon.Name }}</h3>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Types: {{ pokemon.Types.join(", ") }}</li>
-            <li class="list-group-item">Generation: {{ pokemon.Generation }}</li>
-            <li class="list-group-item">Resistance: {{ pokemon.Resistant.join(', ') }}</li>
-            <li class="list-group-item">Weaknesses: {{ pokemon.Weaknesses.join(', ') }}</li>
-            <li class="list-group-item">Quick attacks: <span v-for="(attack, index) in pokemon['Fast Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
-            <li class="list-group-item">Special Attacks: <span v-for="(attack, index) in pokemon['Special Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">
+              Types: {{ pokemon.Types.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Generation: {{ pokemon.Generation }}
+            </li>
+            <li class="list-group-item">
+              Resistance: {{ pokemon.Resistant.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Weaknesses: {{ pokemon.Weaknesses.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Quick attacks:
+              <span
+                v-for="(attack, index) in pokemon['Fast Attack(s)']"
+                :key="index"
+                ><span v-if="index > 0">, </span>{{ attack.Name }}</span
+              >
+            </li>
+            <li class="list-group-item">
+              Special Attacks:
+              <span
+                v-for="(attack, index) in pokemon['Special Attack(s)']"
+                :key="index"
+                ><span v-if="index > 0">, </span>{{ attack.Name }}</span
+              >
+            </li>
             <li class="list-group-item">{{ pokemon.About }}</li>
           </ul>
         </div>
         <h2>Evolutions</h2>
-        <div class="card col-md-12 border rounded" style="width: 18rem;" v-for="evolution in pokemon.evolutions" :key="evolution.Number" :class="[evolution.Types[0]]">
-          <img src="" class="card-img-top" alt="">
+        <div
+          class="card col-md-12 border rounded"
+          style="width: 18rem;"
+          v-for="evolution in pokemon.evolutions"
+          :key="evolution.Number"
+          :class="[evolution.Types[0]]"
+        >
+          <img src="" class="card-img-top" alt="" />
           <div class="card-body">
-            <h3 class="card-title">{{ evolution.Name }} </h3>
+            <h3 class="card-title">{{ evolution.Name }}</h3>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Types: {{ evolution.Types.join(", ") }}</li>
-            <li class="list-group-item">Generation: {{ evolution.Generation }}</li>
-            <li class="list-group-item">Resistance: {{ evolution.Resistant.join(', ') }}</li>
-            <li class="list-group-item">Weaknesses: {{ evolution.Weaknesses.join(', ') }}</li>
-            <li class="list-group-item">Quick attacks: <span v-for="(attack, index) in evolution['Fast Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
-            <li class="list-group-item">Special Attacks: <span v-for="(attack, index) in evolution['Special Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">
+              Types: {{ evolution.Types.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Generation: {{ evolution.Generation }}
+            </li>
+            <li class="list-group-item">
+              Resistance: {{ evolution.Resistant.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Weaknesses: {{ evolution.Weaknesses.join(", ") }}
+            </li>
+            <li class="list-group-item">
+              Quick attacks:
+              <span
+                v-for="(attack, index) in evolution['Fast Attack(s)']"
+                :key="index"
+                ><span v-if="index > 0">, </span>{{ attack.Name }}</span
+              >
+            </li>
+            <li class="list-group-item">
+              Special Attacks:
+              <span
+                v-for="(attack, index) in evolution['Special Attack(s)']"
+                :key="index"
+                ><span v-if="index > 0">, </span>{{ attack.Name }}</span
+              >
+            </li>
             <li class="list-group-item">{{ evolution.About }}</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import axios from 'axios';
+import axios from "axios";
 import { Component } from "vue-property-decorator";
 
 @Component
@@ -58,12 +112,16 @@ export default class Details extends Vue {
       );
       this.pokemons = response.data;
 
-      this.pokemon = this.pokemons.find((p: any) => p.Number == this.$route.params.id);
+      this.pokemon = this.pokemons.find(
+        (p: any) => p.Number == this.$route.params.id
+      );
       this.pokemon.evolutions = [];
 
-      if  (this.pokemon["Next evolution(s)"]) {
+      if (this.pokemon["Next evolution(s)"]) {
         for (const evolution of this.pokemon["Next evolution(s)"]) {
-          const pokemonEvolution = this.pokemons.find((p: any) => evolution.Number == p.Number);
+          const pokemonEvolution = this.pokemons.find(
+            (p: any) => evolution.Number == p.Number
+          );
           if (pokemonEvolution) this.pokemon.evolutions.push(pokemonEvolution);
         }
       }
@@ -72,38 +130,33 @@ export default class Details extends Vue {
 
       this.hasLoaded = true;
     } catch (err) {
-      console.log(err);
+      alert('error');
     }
-    
   }
 
-    clearPokemonsArray(pkmons: any[]) {
-
+  clearPokemonsArray(pkmons: any[]) {
     pkmons = pkmons.map(p => {
-      p["Generation"] = p["Generation"].replace("Generation", "")
+      p["Generation"] = p["Generation"].replace("Generation", "");
       return p;
     });
 
     return pkmons;
-    
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "./sass/variables.scss";
 
-
-.Normal { 
+.Normal {
   background-color: $normal;
 }
-.Poison { 
+.Poison {
   background-color: $poison;
 }
 
-.Fire { 
+.Fire {
   background-color: $fire;
 }
 
@@ -166,6 +219,4 @@ export default class Details extends Vue {
 .Fairy {
   background-color: $fairy;
 }
-
-
 </style>

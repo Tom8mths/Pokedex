@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div id="title">List of Pokémon</div>
-      <div class="search-wrapper" style="margin-bottom: 20px;">
-        <input type="text" v-model="search" placeholder="Search Pokemon"/>
-      </div>
+    <h1 id="title">List of Pokémon</h1>
+    <div class="search-wrapper" style="margin-bottom: 20px;">
+      <p>Search a Pokémon by name:</p>
+      <input type="text" v-model="search" placeholder="Search Pokemon" />
+    </div>
     <table class="table border border-dark rounded">
       <thead class="thead-dark">
         <tr>
@@ -15,12 +16,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="pokemon-row" v-for="pokemon in pokemonList" :key="pokemon.Number">
+        <tr
+          class="pokemon-row"
+          v-for="pokemon in pokemonList"
+          :key="pokemon.Number"
+        >
           <th scope="row">{{ pokemon.Generation }}</th>
-          <td>{{ pokemon["Special Attack(s)"].length + pokemon["Fast Attack(s)"].length }}</td>
+          <td>
+            {{
+              pokemon["Special Attack(s)"].length +
+                pokemon["Fast Attack(s)"].length
+            }}
+          </td>
           <td>{{ pokemon.Name }}</td>
-          <td>{{ pokemon.Types.join(', ') }}</td>
-          <td><router-link :to="{ name: 'details', params: { id: pokemon.Number }}" tag="button" class="btn btn-primary"  id="detail-button">Details</router-link></td>
+          <td>{{ pokemon.Types.join(", ") }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'details', params: { id: pokemon.Number } }"
+              tag="button"
+              class="btn btn-primary"
+              id="detail-button"
+              >Details</router-link
+            >
+          </td>
         </tr>
       </tbody>
     </table>
@@ -39,7 +57,9 @@ export default class Pokelist extends Vue {
 
   get pokemonList() {
     return this.pokemons.filter(pokemon => {
-      return pokemon.Name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+      return (
+        pokemon.Name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+      );
     });
   }
 
@@ -50,7 +70,7 @@ export default class Pokelist extends Vue {
       );
       this.pokemons = this.clearPokemonsArray(response.data);
     } catch (err) {
-      console.log(err);
+      alert('error');
     }
   }
 
@@ -65,14 +85,13 @@ export default class Pokelist extends Vue {
     pkmons = pkmons.map(p => {
       if (!p["Special Attack(s)"]) p["Special Attack(s)"] = 0;
       if (!p["Fast Attack(s)"]) p["Fast Attack(s)"] = 0;
-      p["Generation"] = p["Generation"].replace("Generation", "")
+      p["Generation"] = p["Generation"].replace("Generation", "");
 
       return p;
     });
 
     return pkmons;
   }
-  
 }
 </script>
 
@@ -97,14 +116,14 @@ table {
   font-size: 15px;
 }
 
-.Normal { 
+.Normal {
   background-color: $normal;
 }
-.Poison { 
+.Poison {
   background-color: $poison;
 }
 
-.Fire { 
+.Fire {
   background-color: $fire;
 }
 
@@ -167,5 +186,4 @@ table {
 .Fairy {
   background-color: $fairy;
 }
-
 </style>
