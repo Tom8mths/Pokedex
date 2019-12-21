@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="pokemon-row" v-for="pokemon in pokemons" :key="pokemon.Number">
+        <tr class="pokemon-row" v-for="pokemon in pokemonList" :key="pokemon.Number">
           <th scope="row">{{ pokemon.Generation }}</th>
           <td>{{ pokemon["Special Attack(s)"].length + pokemon["Fast Attack(s)"].length }}</td>
           <td>{{ pokemon.Name }}</td>
@@ -34,7 +34,14 @@ import Component from "vue-class-component";
 
 @Component({ name: "Pokelist" })
 export default class Pokelist extends Vue {
-  private pokemons: any[] = [];  
+  private pokemons: any[] = [];
+  private search: string = "";
+
+  get pokemonList() {
+    return this.pokemons.filter(pokemon => {
+      return pokemon.Name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+    });
+  }
 
   async created() {
     try {
@@ -46,8 +53,6 @@ export default class Pokelist extends Vue {
       console.log(err);
     }
   }
-
-  
 
   clearPokemonsArray(pkmons: any[]) {
     // remove pokemons that doesn't have a name
