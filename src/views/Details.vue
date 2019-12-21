@@ -1,6 +1,6 @@
 <template>
   <div v-if="hasLoaded">
-    <router-link to="/">Go Back</router-link>
+    <router-link to="/" class="btn btn-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</router-link>
     <div class="container">
       <div class="row">
         <h2>Pokemon</h2>
@@ -15,19 +15,19 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              Types: {{ pokemon.Types.join(", ") }}
+              <b>Types:</b> {{ pokemon.Types.join(", ") }}
             </li>
             <li class="list-group-item">
-              Generation: {{ pokemon.Generation }}
+              <b>Generation:</b> {{ pokemon.Generation }}
             </li>
             <li class="list-group-item">
-              Resistance: {{ pokemon.Resistant.join(", ") }}
+              <b>Resistance:</b> {{ pokemon.Resistant.join(", ") }}
             </li>
             <li class="list-group-item">
-              Weaknesses: {{ pokemon.Weaknesses.join(", ") }}
+              <b>Weaknesses:</b> {{ pokemon.Weaknesses.join(", ") }}
             </li>
             <li class="list-group-item">
-              Quick attacks:
+              <b>Quick attacks: </b>
               <span
                 v-for="(attack, index) in pokemon['Fast Attack(s)']"
                 :key="index"
@@ -35,7 +35,7 @@
               >
             </li>
             <li class="list-group-item">
-              Special Attacks:
+              <b>Special Attacks: </b>
               <span
                 v-for="(attack, index) in pokemon['Special Attack(s)']"
                 :key="index"
@@ -59,19 +59,19 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              Types: {{ evolution.Types.join(", ") }}
+              <b>Types:</b> {{ evolution.Types.join(", ") }}
             </li>
             <li class="list-group-item">
-              Generation: {{ evolution.Generation }}
+              <b>Generation:</b> {{ evolution.Generation }}
             </li>
             <li class="list-group-item">
-              Resistance: {{ evolution.Resistant.join(", ") }}
+              <b>Resistance:</b> {{ evolution.Resistant.join(", ") }}
             </li>
             <li class="list-group-item">
-              Weaknesses: {{ evolution.Weaknesses.join(", ") }}
+              <b>Weaknesses:</b> {{ evolution.Weaknesses.join(", ") }}
             </li>
             <li class="list-group-item">
-              Quick attacks:
+              <b>Quick attacks: </b>
               <span
                 v-for="(attack, index) in evolution['Fast Attack(s)']"
                 :key="index"
@@ -79,7 +79,7 @@
               >
             </li>
             <li class="list-group-item">
-              Special Attacks:
+              <b>Special Attacks: </b>
               <span
                 v-for="(attack, index) in evolution['Special Attack(s)']"
                 :key="index"

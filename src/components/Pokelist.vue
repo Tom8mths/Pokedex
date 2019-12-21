@@ -1,11 +1,13 @@
 <template>
   <div>
     <h1 id="title">List of Pokémon</h1>
-    <div class="search-wrapper" style="margin-bottom: 20px;">
-      <p>Search a Pokémon by name:</p>
-      <input type="text" v-model="search" placeholder="Search Pokemon" />
-    </div>
-    <table class="table border border-dark rounded">
+    <h5>Search your pokemon:</h5>
+    <label for="inp" class="inp">
+      <input type="text" v-model="search" id="inp" placeholder=".">
+      <span class="label">Pokemon Name</span>
+      <span class="border"></span>
+    </label>
+    <table class="table borderless">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Generation</th>
@@ -20,6 +22,7 @@
           class="pokemon-row"
           v-for="pokemon in pokemonList"
           :key="pokemon.Number"
+          :class="[pokemon.Types[0]]"
         >
           <th scope="row">{{ pokemon.Generation }}</th>
           <td>
@@ -31,12 +34,12 @@
           <td>{{ pokemon.Name }}</td>
           <td>{{ pokemon.Types.join(", ") }}</td>
           <td>
-            <router-link
+            <router-link 
               :to="{ name: 'details', params: { id: pokemon.Number } }"
               tag="button"
-              class="btn btn-primary"
+              class="btn btn-dark"
               id="detail-button"
-              >Details</router-link
+              ><i class="fa fa-info" aria-hidden="true"></i> Details</router-link
             >
           </td>
         </tr>
@@ -104,10 +107,96 @@ table {
   width: 50%;
 }
 
+
+// INPUT
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: grid;
+  font-family: Avenir;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+* {
+  box-sizing: border-box;
+}
+.inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 20px;
+}
+.inp .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  font-size: 16px;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+.inp .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #07f;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+.inp input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid #c8ccd4;
+  background: none;
+  border-radius: 0;
+  color: #223254;
+  transition: all 0.15s ease;
+}
+.inp input:hover {
+  background: rgba(34,50,84,0.03);
+}
+.inp input:not(:placeholder-shown) + span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus {
+  background: none;
+  outline: none;
+}
+.inp input:focus + span {
+  color: #07f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus + span + .border {
+  transform: scaleX(1);
+}
+
+
+
+// 
+
 .pokemon-row:hover #detail-button {
-  display: block;
   opacity: 1;
   transition: all 200ms ease-in-out;
+}
+
+.pokemon-row:hover {
+  transition: all 250ms ease-in-out;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) );
 }
 
 #detail-button {
