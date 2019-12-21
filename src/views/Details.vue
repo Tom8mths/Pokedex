@@ -4,10 +4,10 @@
     <div class="container">
       <div class="row">
         <h2>Pokemon</h2>
-        <div class="card col-md-12 border rounded " style="width: 18rem;">
+        <div class="card col-md-12 border rounded " style="width: 18rem;" :class="[pokemon.Types[0]]">
           <img src="" class="card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title">{{ pokemon.Name }} </h5>
+            <h3 class="card-title">{{ pokemon.Name }} </h3>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Types: {{ pokemon.Types.join(", ") }}</li>
@@ -20,10 +20,10 @@
           </ul>
         </div>
         <h2>Evolutions</h2>
-        <div class="card col-md-12 border rounded " style="width: 18rem;" v-for="evolution in pokemon.evolutions" :key="evolution.Number">
+        <div class="card col-md-12 border rounded" style="width: 18rem;" v-for="evolution in pokemon.evolutions" :key="evolution.Number" :class="[evolution.Types[0]]">
           <img src="" class="card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title">{{ evolution.Name }} </h5>
+            <h3 class="card-title">{{ evolution.Name }} </h3>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Types: {{ evolution.Types.join(", ") }}</li>
@@ -94,6 +94,7 @@ export default class Details extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "./sass/variables.scss";
+
 
 .Normal { 
   background-color: $normal;
