@@ -1,9 +1,10 @@
 <template>
   <div v-if="hasLoaded">
-    <router-link to="/">Voltar</router-link>
+    <router-link to="/">Go Back</router-link>
     <div class="container">
       <div class="row">
-        <div class="card col-md-6 border rounded " style="width: 18rem;">
+        <h2>Pokemon</h2>
+        <div class="card col-md-12 border rounded " style="width: 18rem;">
           <img src="" class="card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{ pokemon.Name }} </h5>
@@ -15,11 +16,24 @@
             <li class="list-group-item">Weaknesses: {{ pokemon.Weaknesses.join(', ') }}</li>
             <li class="list-group-item">Quick attacks: <span v-for="(attack, index) in pokemon['Fast Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
             <li class="list-group-item">Special Attacks: <span v-for="(attack, index) in pokemon['Special Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">{{ pokemon.About }}</li>
           </ul>
         </div>
-        <div class="col-md-6">
-          <h2>Details</h2>
-          <p class="detail-text">{{ pokemon.About }}</p>
+        <h2>Evolutions</h2>
+        <div class="card col-md-12 border rounded " style="width: 18rem;" v-for="evolution in pokemon.evolutions" :key="evolution.Number">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{ evolution.Name }} </h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Types: {{ evolution.Types.join(", ") }}</li>
+            <li class="list-group-item">Generation: {{ evolution.Generation }}</li>
+            <li class="list-group-item">Resistance: {{ evolution.Resistant.join(', ') }}</li>
+            <li class="list-group-item">Weaknesses: {{ evolution.Weaknesses.join(', ') }}</li>
+            <li class="list-group-item">Quick attacks: <span v-for="(attack, index) in evolution['Fast Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">Special Attacks: <span v-for="(attack, index) in evolution['Special Attack(s)']" :key="index"><span v-if="index > 0">, </span>{{ attack.Name }}</span></li>
+            <li class="list-group-item">{{ evolution.About }}</li>
+          </ul>
         </div>
       </div>
     </div>
