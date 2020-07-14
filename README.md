@@ -25,5 +25,8 @@ npm run test:unit
 npm run lint
 ```
 
+### Live Demo
+https://pokedextestfront.herokuapp.com/#/details/001
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
